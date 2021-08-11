@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SampleFirebase</string>
+
+    <string name="input_name">名前を入力してください。</string>
+    <string name="cancel_button">キャンセル</string>
+    <string name="regist_button">登録</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "612682421342",
+    "project_id": "samplefirebase-4b8f3",
+    "storage_bucket": "samplefirebase-4b8f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612682421342:android:63ab5f69a34b76b1d810cf",
+        "android_client_info": {
+          "package_name": "jp.techacademy.yui.kuwahara.samplefirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612682421342-9vkv5rha8k83c0chbhohktj9f29bih3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUcsoWNygIMBoPVruJG7AwUCETJTAw3bM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612682421342-9vkv5rha8k83c0chbhohktj9f29bih3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
