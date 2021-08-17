@@ -54,16 +54,18 @@ class RegistActivity : AppCompatActivity(), DatabaseReference.CompletionListener
             val name = nameText.text.toString()
             val gender = genderSpinner.selectedItem.toString()
 
-            val dataBaseReference = FirebaseDatabase.getInstance().reference
-            val genderRef = dataBaseReference.child("userId") // 直接名前を入れる
-
+//            val dataBaseReference = FirebaseDatabase.getInstance().reference
+//            val genderRef = dataBaseReference.child("userId") // 直接名前を入れる
+//
             val data = HashMap<String, String>()
+//
+//            data["name"] = name
+//            data["gender"] = gender
 
-            data["name"] = name
-            data["gender"] = gender
+            viewModel.getUserData(name, gender, data)
 
             // 保存
-            genderRef.push().setValue(data, this)
+            //genderRef.push().setValue(data, this)
 
         }
     }

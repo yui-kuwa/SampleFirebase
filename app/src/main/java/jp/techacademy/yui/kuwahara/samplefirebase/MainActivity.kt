@@ -3,13 +3,10 @@ package jp.techacademy.yui.kuwahara.samplefirebase
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.*
 import jp.techacademy.yui.kuwahara.samplefirebase.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.viewModel = MainViewModel()
-
-
 
         viewModel = MainViewModel()
 
@@ -42,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         //runBlocking{
-        viewModel.updateUserDataList()
+        viewModel.updateUserDataListFB()
         //delay(1000)
         //}
 
@@ -86,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     viewModel.removeUserData(user)
 
                     //リストの更新
-                    viewModel.updateUserDataList()
+                    viewModel.updateUserDataListFB()
 
                     //adapter更新の呼び出し
                     adapter.notifyDataSetChanged()

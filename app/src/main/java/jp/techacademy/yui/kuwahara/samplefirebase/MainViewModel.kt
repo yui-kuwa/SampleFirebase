@@ -1,14 +1,16 @@
 package jp.techacademy.yui.kuwahara.samplefirebase
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
-class MainViewModel : AppCompatActivity() {
+class MainViewModel : ViewModel() {
+
+    private val userRepository: UserRepository = UserRepositoryMock()
 
     var userList: ArrayList<User> = arrayListOf()
 //    lateinit var adapter: CustomAdapter
@@ -23,8 +25,14 @@ class MainViewModel : AppCompatActivity() {
 
     val eventTypeLiveData = MutableLiveData<EventType>()
 
+    // repository用
+/*    fun updateUserDataList() {
+        userList = userRepository.getUsers().toMutableList()
+
+    }*/
     //
-    fun updateUserDataList() {
+
+    fun updateUserDataListFB() {
 
         // recyclerViewのユーザのリストをクリア
         userList.clear()
