@@ -1,8 +1,7 @@
 package jp.techacademy.yui.kuwahara.samplefirebase
 
-import android.content.Intent
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -11,67 +10,58 @@ import java.util.*
 
 class MainViewModel : AppCompatActivity() {
 
-/*    fun removeButtonClicked() { // 削除ボタン
+    var userList: ArrayList<User> = arrayListOf()
+//    lateinit var adapter: CustomAdapter
 
-        //リストのセルをタップでデータ削除
-        adapter.setOnUserCellClickListener(
-            object : CustomAdapter.OnUserCellClickListener {
-                override fun onItemClick(user: User) {
+    //firebaseのデータ全部取得
+    //①Firebase Databaseのインスタンスを取得
+    val database = FirebaseDatabase.getInstance().reference
 
-                    val dataBaseReference = FirebaseDatabase.getInstance().reference
-                    val genderRef = dataBaseReference.child("userId").child(user.uid)// 直接名前を入れる
-
-                    //val userNum: String = genderRef.toString()
-                    //Log.d("kotlintest",userNum)
-
-                    genderRef.removeValue()
-
-                    updateDataList()
-                }
-            }
-        )
+    enum class EventType {
+        TEST
     }
 
-    private fun updateDataList() {
+    val eventTypeLiveData = MutableLiveData<EventType>()
+
+    //
+    fun updateUserDataList() {
 
         // recyclerViewのユーザのリストをクリア
-        mUserList.clear()//
-
-        //firebaseのデータ全部取得
-        //①Firebase Databaseのインスタンスを取得
-        val database = FirebaseDatabase.getInstance().reference
-
-        //②リファレンスを取得
-        val genderRef = database.child("userId")
+        userList.clear()
 
         //③データを取得する（リスナーを用意して二つのメソッドをオーバーライド）
-        genderRef.addChildEventListener(object : ChildEventListener {
+        database.child("userId").addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
-                Log.d("kotlintest", dataSnapshot.toString())
+                //Log.d("kotlintest",dataSnapshot.toString())
 
                 val map = dataSnapshot.value as Map<String, String>
                 val name = map["name"] ?: ""
                 val gender = map["gender"] ?: ""
 
-                Log.d("kotlintest", map.toString())
+                //Log.d("kotlintest",map.toString())
                 //userListDataの配列に格納
-                val data: User = User().also {
+                val data = User().also {
                     it.uid = dataSnapshot.key.toString()
                     it.name = name
                     it.gender = gender
                 }
 
-                mUserList.add(data)
+                //ユーザリストにユーザのデータを追加
+                userList.add(data)
 
                 //リスト全体を更新するためのメソッド
-                adapter.notifyDataSetChanged()
-            }
+//                adapter.notifyDataSetChanged()
+                eventTypeLiveData.postValue(EventType.TEST)
 
+            }
             override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {}
             override fun onChildRemoved(dataSnapshot: DataSnapshot) {}
             override fun onChildMoved(dataSnapshot: DataSnapshot, s: String?) {}
             override fun onCancelled(databaseError: DatabaseError) {}
         })
-    }*/
+    }
 
+    fun removeUserData(user: User) {
+        database.child("userId").child(user.uid).removeValue()
+    }
 }

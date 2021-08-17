@@ -7,10 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recyclerview.view.*
 
-class CustomAdapter(private val userListData: ArrayList<User>) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>(){
+class CustomAdapter() : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>(){
 
     // リスナを格納する変数を定義（lateinitで初期化を遅らせている）
     private lateinit var listener: OnUserCellClickListener
+    private lateinit var userListData: ArrayList<User>
 
     // インターフェースを作成
     interface  OnUserCellClickListener {
@@ -21,6 +22,10 @@ class CustomAdapter(private val userListData: ArrayList<User>) : RecyclerView.Ad
     fun setOnUserCellClickListener(listener: OnUserCellClickListener) {
         // 定義した変数listenerに実行したい処理を引数で渡す（BookListFragmentで渡している）
         this.listener = listener
+    }
+
+    fun setUserListData(userList: ArrayList<User>) {
+        userListData = userList
     }
 
     // ViewHolderクラス(別ファイルに書いてもOK)
@@ -43,7 +48,7 @@ class CustomAdapter(private val userListData: ArrayList<User>) : RecyclerView.Ad
 
     // recyclerViewのコンテンツ(userListDataの件数)のサイズ
     override fun getItemCount(): Int {
-        return userListData.size
+        return userListData.size // userListDataが初期化されてないというエラーが出る
     }
 
     // ViewHolderに表示するテキストを挿入

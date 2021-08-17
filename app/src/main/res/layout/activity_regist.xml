@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="jp.techacademy.yui.kuwahara.samplefirebase.RegistViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"

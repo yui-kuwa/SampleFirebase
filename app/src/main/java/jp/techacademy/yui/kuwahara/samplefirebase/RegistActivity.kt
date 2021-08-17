@@ -15,16 +15,17 @@ import kotlinx.android.synthetic.main.activity_regist.*
 
 class RegistActivity : AppCompatActivity(), DatabaseReference.CompletionListener{
 
+    private lateinit var registBinding: ActivityRegistBinding
+    private lateinit var viewModel: RegistViewModel
     private lateinit var mAdapter: ArrayAdapter<String> //スピナー用adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val databinding = DataBindingUtil.setContentView<ActivityRegistBinding>(this, R.layout.activity_regist)
-        //databinding.viewModel = MainViewModel()
+        val binding = DataBindingUtil.setContentView<ActivityRegistBinding>(this, R.layout.activity_regist)
+        binding.viewModel = RegistViewModel()
 
-        val mainBinding : ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainBinding.root)
+        viewModel = RegistViewModel()
 
         val registBinding : ActivityRegistBinding = ActivityRegistBinding.inflate(layoutInflater)
         setContentView(registBinding.root)
@@ -38,10 +39,10 @@ class RegistActivity : AppCompatActivity(), DatabaseReference.CompletionListener
         // スピナーを取得し、アダプタを設定します。
         registBinding.genderSpinner.adapter = mAdapter
 
-/*        //データバインディング用
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        binding.viewModel = MainViewModel()*/
+        setupView()
+    }
 
+    fun setupView(){
         cancelButton.setOnClickListener {
             finish()
         }
@@ -65,7 +66,6 @@ class RegistActivity : AppCompatActivity(), DatabaseReference.CompletionListener
             genderRef.push().setValue(data, this)
 
         }
-
     }
 
     //書き込み完了を受け取る
